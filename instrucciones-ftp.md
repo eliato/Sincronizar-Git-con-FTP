@@ -30,7 +30,7 @@ touch .github/workflows/main.yml
 
 ```
 ---
-## Pega el siguiente contenido exacto (ajustando la carpeta de destino):
+## 📃 Paso 3: Pega el siguiente contenido exacto (ajustando la carpeta de destino):
 
 ```yml
 name: 🚀 Deploy Website via FTP
@@ -59,3 +59,20 @@ jobs:
 ```
 ---
 ## 🚀 Paso 4: Guardar y Subir (Commit & Push)
+Para activar el despliegue automático, sube la nueva configuración a GitHub:
+```bash
+git add .
+git commit -m "Configuración de despliegue automático FTP"
+git push origin main
+```
+
+---
+
+### ✅ ¿Cómo verificar el proceso?
+Ve a la pestaña Actions en la parte superior de tu repositorio en GitHub.
+
+Haz clic en la ejecución más reciente (llamada "Configuración de despliegue...").
+
+Si el icono se pone en verde, significa que tus archivos ya están en el servidor.
+
+Si sale rojo, revisa los logs en esa misma página para ver si hay errores de conexión o permisos.
