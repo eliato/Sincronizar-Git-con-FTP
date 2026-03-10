@@ -24,3 +24,45 @@ Debemos indicarle a GitHub qué debe hacer cuando subimos código.
 1. En la raíz de tu proyecto local, crea la siguiente estructura de carpetas:
    ```bash
    mkdir -p .github/workflows
+
+## Paso 3: Crea un archivo llamado main.yml dentro de esa carpeta:
+con el siguiente comando:
+    ```bash
+    touch .github/workflows/main.yml
+agrega el siguiente contenido:
+    ```bash
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main  # Cambia a 'master' si tu rama principal se llama así
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        # IMPORTANTE: La carpeta destino debe terminar SIEMPRE con una barra diagonal (/)
+        server-dir: ./public_html/    
+
+**(Nota: Si quieres subir los archivos a la raíz principal del FTP y no a una subcarpeta, debes poner server-dir: ./)**
+
+## 🚀 Paso 4: Guardar y Subir (Commit & Push)
+Ahora solo tienes que registrar los cambios en Git y subirlos a GitHub. En tu terminal ejecuta:
+   ```bash
+git add .
+git commit -m "Configura GitHub Actions para FTP"
+git push origin main
+
+
+**¡Listo! A partir de ahora, ve a la pestaña "Actions" en tu repositorio de GitHub. Verás cómo empieza a ejecutarse el proceso y a subir tus archivos automáticamente.**
